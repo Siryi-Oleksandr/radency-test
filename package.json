@@ -1,15 +1,22 @@
 {
-  "name": "vite-test",
+  "name": "radency-test",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base=/radency-test/",
     "preview": "vite preview"
   },
   "devDependencies": {
     "sass": "^1.64.1",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "glob": "^8.1.0"
+  },
+  "author": "Oleksandr Siryi <oleksandrsiryy@gmail.com>",
+  "license": "",
+  "dependencies": {
+    "vite-plugin-full-reload": "^1.0.5",
+    "vite-plugin-html-inject": "^1.0.1"
   }
 }
