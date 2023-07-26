@@ -1,0 +1,15 @@
+.btn {
+  padding: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  outline: none;
+
+  border-radius: 50%;
+
+  background-color: $bg-btn-color;
+  color: $txt-white-color;
+}
