@@ -1,5 +1,5 @@
 .btn {
-  padding: 8px;
+  padding: 4px;
 
   display: flex;
   justify-content: center;
@@ -8,8 +8,21 @@
   border: none;
   outline: none;
 
-  border-radius: 50%;
-
-  background-color: $bg-btn-color;
   color: $txt-white-color;
+  background-color: transparent;
+
+  transition: color $animation, background-color $animation,
+    box-shadow $animation;
+
+  & svg {
+    fill: $bg-color;
+    transition: fill $animation, transform $animation;
+  }
+
+  &:hover svg,
+  &:focus svg {
+    fill: $bg-btn-active-color;
+    transform: scale(1.1);
+    // box-shadow: $btn-shadow;
+  }
 }

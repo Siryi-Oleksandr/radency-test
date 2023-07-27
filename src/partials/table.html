@@ -1,6 +1,7 @@
-<table>
+<table class="table">
   <thead>
-    <tr>
+    <tr class="table__head">
+      <th></th>
       <th>Name</th>
       <th>Created</th>
       <th>Category</th>
@@ -9,34 +10,67 @@
       <th>Icons</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="table__body">
     <tr>
-      <td>Item 1</td>
-      <td class="center">2023-07-25</td>
-      <td class="category">Technology</td>
-      <td>This is the content of Item 1.</td>
-      <td class="date">2023-07-25</td>
-      <td class="icon">
-        <svg class="icon-cart" width="16" height="16">
-          <use href="./images/sprite.svg#cart"></use>
-        </svg>
+      <td>
+        <span class="icon-wrapper">
+          <svg width="16" height="16">
+            <use href="./images/sprite.svg#cart"></use>
+          </svg>
+        </span>
       </td>
+      <td>Item 1</td>
+      <td>2023-07-25</td>
+      <td>Technology</td>
+      <td>This is the content of Item 1.</td>
+      <td>2023-07-25</td>
+      <td></td>
     </tr>
     <tr>
+      <td>
+        <span class="icon-wrapper">
+          <svg width="16" height="16">
+            <use href="./images/sprite.svg#hangouts"></use>
+          </svg>
+        </span>
+      </td>
       <td>Item 2</td>
-      <td class="center">2023-07-24</td>
-      <td class="category">Science</td>
+      <td>2023-07-24</td>
+      <td>Science</td>
       <td>This is the content of Item 2.</td>
-      <td class="date">2023-07-24</td>
-      <td class="icon">🔍</td>
+      <td>2023-07-24</td>
+      <td>🔍</td>
     </tr>
     <tr>
+      <td>
+        <span class="icon-wrapper">
+          <svg width="16" height="16">
+            <use href="./images/sprite.svg#lightbulb"></use>
+          </svg>
+        </span>
+      </td>
       <td>Item 3</td>
-      <td class="center">2023-07-23</td>
-      <td class="category">Nature</td>
+      <td>2023-07-23</td>
+      <td>Nature</td>
       <td>This is the content of Item 3.</td>
-      <td class="date">2023-07-23</td>
-      <td class="icon">🌿</td>
+      <td>2023-07-23</td>
+      <td class="options">
+        <button class="btn" type="button">
+          <svg class="icon" width="16" height="16">
+            <use href="./images/sprite.svg#pencil"></use>
+          </svg>
+        </button>
+        <button class="btn" type="button">
+          <svg class="icon" width="16" height="16">
+            <use href="./images/sprite.svg#box-add"></use>
+          </svg>
+        </button>
+        <button class="btn" type="button">
+          <svg class="icon" width="16" height="16">
+            <use href="./images/sprite.svg#bin"></use>
+          </svg>
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

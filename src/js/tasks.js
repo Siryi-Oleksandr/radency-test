@@ -1,0 +1,51 @@
+export const tasks = [
+  {
+    name: 'Shopping list',
+    created: 'April 20, 2023',
+    category: 'Task',
+    content: 'Tomatoes, bread',
+    dates: ['April 20, 2023', 'April 25, 2023'],
+  },
+  {
+    name: 'New feature',
+    created: 'April 30, 2023',
+    category: 'Random Thought',
+    content: 'Amazing features',
+    dates: [],
+  },
+  {
+    name: 'The theory of evolution',
+    created: 'Mart 16, 2023',
+    category: 'Idea',
+    content: 'It is something increadable',
+    dates: [],
+  },
+  {
+    name: 'Books',
+    created: 'April 19, 2023',
+    category: 'Task',
+    content: 'Learn new material',
+    dates: ['April 20, 2023', 'April 15, 2023'],
+  },
+  {
+    name: 'Who is God',
+    created: 'May 20, 2023',
+    category: 'Random Thought',
+    content: 'Who did create world?',
+    dates: [],
+  },
+  {
+    name: 'Pet project',
+    created: 'May 10, 2023',
+    category: 'Idea',
+    content: 'Create portfolio application',
+    dates: [],
+  },
+  {
+    name: 'Learn English',
+    created: 'April 20, 2023',
+    category: 'Idea',
+    content: 'Order new courses in English',
+    dates: ['April 20, 2023', 'April 25, 2023'],
+  },
+];

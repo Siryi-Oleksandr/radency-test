@@ -1,10 +1,10 @@
 body {
+  padding-top: 20px;
   font-family: 'Roboto', 'Montserrat', sans-serif;
   color: $txt-black-color;
   min-height: 101%;
   display: grid;
   grid-template-rows: auto 1fr auto;
-
 }
 
 html {
