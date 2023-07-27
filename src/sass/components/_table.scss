@@ -32,6 +32,13 @@ tr:hover {
   align-items: center;
 }
 
+.options-wrapper {
+  display: flex;
+  gap: 6px;
+  justify-content: end;
+  align-items: center;
+}
+
 .icon-wrapper {
   padding: 8px;
   width: 32px;
@@ -45,4 +52,8 @@ tr:hover {
 
   background-color: $bg-color;
   fill: $txt-white-color;
+}
+
+.table--summary {
+  margin-top: 50px;
 }

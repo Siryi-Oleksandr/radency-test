@@ -26,6 +26,16 @@
   }
 }
 
+.btn--head svg {
+  fill: $bg-white-color;
+}
+
+.btn--head:hover svg,
+.btn--head:focus svg {
+  fill: $bg-table-row-color;
+  transform: scale(1.1);
+}
+
 .btn-create {
   display: block;
   margin-left: auto;

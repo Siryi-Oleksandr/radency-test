@@ -1,3 +1,17 @@
+function getIcon(category) {
+  switch (category) {
+    case 'Task':
+      return 'cart';
+    case 'Random Thought':
+      return 'bubble';
+    case 'Idea':
+      return 'lightbulb';
+
+    default:
+      return 'lightbulb';
+  }
+}
+
 export function createTableMarkup(tasks) {
   return `<table class="table">
   <thead>
@@ -8,13 +22,13 @@ export function createTableMarkup(tasks) {
       <th>Category</th>
       <th>Content</th>
       <th>Dates</th>
-      <th>
-        <button id="btn-archiv-all" class="btn" type="button">
+      <th class="options-wrapper">
+        <button id="btn-archiv-all" class="btn btn--head" type="button">
           <svg class="icon" width="16" height="16">
             <use href="./images/sprite.svg#box-add"></use>
           </svg>
         </button>
-        <button id="btn-delete-all" class="btn" type="button">
+        <button id="btn-delete-all" class="btn btn--head" type="button">
           <svg class="icon" width="16" height="16">
             <use href="./images/sprite.svg#bin"></use>
           </svg>
@@ -25,13 +39,12 @@ export function createTableMarkup(tasks) {
    ${tasks
      .map(task => {
        const { name, created, category, content, dates } = task;
-       //   const filterGenres = trimGenresLibraryList(genres);
 
        return `<tr>
   <td>
     <span class="icon-wrapper">
       <svg width="16" height="16">
-        <use href="./images/sprite.svg#lightbulb"></use>
+        <use href="./images/sprite.svg#${getIcon(category)}"></use>
       </svg>
     </span>
   </td>

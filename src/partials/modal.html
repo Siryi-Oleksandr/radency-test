@@ -1,0 +1,38 @@
+<div class="backdrop is-hidden" data-modal>
+  <div class="modal">
+    <button type="button" data-modal-close>
+      <svg class="modal-close" width="11" height="11">
+        <use href="./images/sprite-icons.svg#icon-cross"></use>
+      </svg>
+    </button>
+
+    <form action="/submit" method="post">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="created">Created:</label>
+      <input type="date" id="created" name="created" required />
+
+      <label>Category:</label>
+      <input type="checkbox" id="cat1" name="category" value="Category 1" />
+      <label for="cat1">Category 1</label>
+
+      <input type="checkbox" id="cat2" name="category" value="Category 2" />
+      <label for="cat2">Category 2</label>
+
+      <input type="checkbox" id="cat3" name="category" value="Category 3" />
+      <label for="cat3">Category 3</label>
+
+      <label for="content">Content:</label>
+      <textarea
+        id="content"
+        name="content"
+        rows="4"
+        cols="50"
+        required
+      ></textarea>
+
+      <input type="submit" value="Submit" />
+    </form>
+  </div>
+</div>
