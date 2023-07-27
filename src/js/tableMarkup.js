@@ -1,39 +1,65 @@
 export function createTableMarkup(tasks) {
-  return tasks
-    .map(task => {
-      const { name, created, category, content, dates } = task;
-      //   const filterGenres = trimGenresLibraryList(genres);
+  return `<table class="table">
+  <thead>
+    <tr class="table__head">
+      <th></th>
+      <th>Name</th>
+      <th>Created</th>
+      <th>Category</th>
+      <th>Content</th>
+      <th>Dates</th>
+      <th>
+        <button id="btn-archiv-all" class="btn" type="button">
+          <svg class="icon" width="16" height="16">
+            <use href="./images/sprite.svg#box-add"></use>
+          </svg>
+        </button>
+        <button id="btn-delete-all" class="btn" type="button">
+          <svg class="icon" width="16" height="16">
+            <use href="./images/sprite.svg#bin"></use>
+          </svg>
+        </button></th>
+    </tr>
+  </thead>
+  <tbody class="table__body">
+   ${tasks
+     .map(task => {
+       const { name, created, category, content, dates } = task;
+       //   const filterGenres = trimGenresLibraryList(genres);
 
-      return `<li class="films__item js-target" data-id="${id}">
-                  <div class="films__img-wrapper">
-                   <img
-                    src="${
-                      poster_path
-                        ? `https://image.tmdb.org/t/p/w500${poster_path}`
-                        : defaultImg
-                    }"
-                    alt="${title}"
-                    class="films__img" loading="lazy"
-                   />
-                   <div class="rating">
-                     <p class="films__desk">
-                       <span class="films__rating--text"> Rating: </span>
-                       <span class="films__rating">${vote_average.toFixed(
-                         1
-                       )}</span>
-                     </p>
-                    </div>
-                  </div>
-               <div class="films__info">
-                 <p class="films__name">${title}</p>
-                 <p class="films__desk">
-                   <span class="films__genre">${filterGenres}</span> |
-                    <span class="films__year">${Number.parseInt(
-                      release_date
-                    )}</span>
-                  </p>
-               </div>
-             </li>`;
-    })
-    .join('');
+       return `<tr>
+  <td>
+    <span class="icon-wrapper">
+      <svg width="16" height="16">
+        <use href="./images/sprite.svg#lightbulb"></use>
+      </svg>
+    </span>
+  </td>
+  <td>${name}</td>
+  <td>${created}</td>
+  <td>${category}</td>
+  <td>${content}</td>
+  <td>${dates}</td>
+  <td class="options">
+    <button id="btn-edit" class="btn" type="button">
+      <svg class="icon" width="16" height="16">
+        <use href="./images/sprite.svg#pencil"></use>
+      </svg>
+    </button>
+    <button id="btn-archiv" class="btn" type="button">
+      <svg class="icon" width="16" height="16">
+        <use href="./images/sprite.svg#box-add"></use>
+      </svg>
+    </button>
+    <button id="btn-delete" class="btn" type="button">
+      <svg class="icon" width="16" height="16">
+        <use href="./images/sprite.svg#bin"></use>
+      </svg>
+    </button>
+  </td>
+</tr>`;
+     })
+     .join('')}
+  </tbody>
+</table>`;
 }
