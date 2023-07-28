@@ -1,8 +1,9 @@
 import { refs } from './js/refs';
 import { tasks } from './js/tasks';
 import { createTableMarkup } from './js/notesTableMarkup';
-import { TasksAPI } from './js/tasksAPI';
+import { TasksAPI } from './js/TasksAPI';
 import { getFormValues } from './js/getFormValues';
+import { getOption } from './services/getOption';
 
 const tasksAPI = new TasksAPI(tasks);
 
@@ -35,20 +36,7 @@ refs.formCreate.addEventListener('submit', function (e) {
 refs.mainTable.addEventListener('click', handleOptions);
 
 function handleOptions(e) {
-  const btnDelete =
-    e.target.className === 'js-btn-delete'
-      ? e.target
-      : e.target.closest('#btn-delete');
-
-  const btnEdit =
-    e.target.className === 'js-btn-edit'
-      ? e.target
-      : e.target.closest('#btn-edit');
-
-  const btnArchiv =
-    e.target.className === 'js-btn-archiv'
-      ? e.target
-      : e.target.closest('#btn-archiv');
+  const { btnArchiv, btnDelete, btnEdit } = getOption(e);
 
   if (btnDelete) {
     const taskId = btnDelete.dataset.task;
@@ -68,7 +56,20 @@ function handleOptions(e) {
   if (btnEdit) {
     console.log('😍 Edit', btnEdit.dataset.task);
   }
+
   if (btnArchiv) {
-    console.log('🥰 Archiv', btnArchiv.dataset.task);
+    const taskId = btnArchiv.dataset.task;
+
+    try {
+      const isArchived = tasksAPI.archiveTask(taskId);
+      if (isArchived) {
+        refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
+        console.log('😎', tasksAPI.getArchivedTasks());
+      } else {
+        throw new Error(`Task with ID ${taskId} was not found.`);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
   }
 }
