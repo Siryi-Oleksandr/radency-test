@@ -1,7 +1,8 @@
+import { nanoid } from 'nanoid';
 import { refs } from './js/refs';
 import { tasks } from './js/tasks';
 import { createTableMarkup } from './js/notesTableMarkup';
-import { nanoid } from 'nanoid';
+import { deleteTask } from './services/deleteTask';
 const archivedTasks = [];
 
 refs.mainTable.innerHTML = createTableMarkup(tasks);
@@ -37,9 +38,6 @@ refs.formCreate.addEventListener('submit', function (event) {
 refs.mainTable.addEventListener('click', handleOptions);
 
 function handleOptions(e) {
-  //   console.log('e.target', e.target);
-  //   console.log('e.target.closest', e.target.closest('#btn-delete'));
-
   const btnDelete =
     e.target.className === 'js-btn-delete'
       ? e.target
@@ -56,7 +54,10 @@ function handleOptions(e) {
       : e.target.closest('#btn-archiv');
 
   if (btnDelete) {
-    console.log('😎 Delete', btnDelete.dataset.task);
+    const taskId = btnDelete.dataset.task;
+    deleteTask(tasks, taskId);
+    refs.mainTable.innerHTML = createTableMarkup(tasks);
+    return console.log(`Task with ID ${taskId} has been deleted.`);
   }
   if (btnEdit) {
     console.log('😍 Edit', btnEdit.dataset.task);
