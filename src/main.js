@@ -1,38 +1,35 @@
-import { nanoid } from 'nanoid';
 import { refs } from './js/refs';
 import { tasks } from './js/tasks';
 import { createTableMarkup } from './js/notesTableMarkup';
-import { deleteTask } from './services/deleteTask';
-const archivedTasks = [];
+import { TasksAPI } from './js/tasksAPI';
+import { getFormValues } from './js/getFormValues';
+
+const tasksAPI = new TasksAPI(tasks);
 
 refs.mainTable.innerHTML = createTableMarkup(tasks);
 
-refs.formCreate.addEventListener('submit', function (event) {
-  event.preventDefault();
+refs.formCreate.addEventListener('submit', function (e) {
+  e.preventDefault();
 
-  // Отримуємо значення введених користувачем даних з полів форми
-  const name = document.getElementById('name').value;
-  const created = document.getElementById('created').value;
-  const category = document.getElementById('category').value;
-  const content = document.getElementById('content').value;
+  try {
+    const formValues = getFormValues(refs.formCreate);
+    const { name, created, category, content } = formValues;
 
-  const newTask = {
-    id: nanoid(),
-    name,
-    created,
-    category,
-    content,
-    dates: [],
-  };
+    if (!name || !created || !category || !content) {
+      throw new Error('All fields are required.');
+    }
 
-  refs.formCreate.reset();
-  // close modals
-  var parentModal = this.closest('.modal');
-  parentModal.classList.remove('active');
-  refs.modalOverlay.classList.remove('active');
+    refs.formCreate.reset();
+    // close modals
+    var parentModal = this.closest('.modal');
+    parentModal.classList.remove('active');
+    refs.modalOverlay.classList.remove('active');
 
-  tasks.push(newTask);
-  refs.mainTable.innerHTML = createTableMarkup(tasks);
+    tasksAPI.createTask(name, created, category, content);
+    refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
 });
 
 refs.mainTable.addEventListener('click', handleOptions);
@@ -55,10 +52,19 @@ function handleOptions(e) {
 
   if (btnDelete) {
     const taskId = btnDelete.dataset.task;
-    deleteTask(tasks, taskId);
-    refs.mainTable.innerHTML = createTableMarkup(tasks);
-    return console.log(`Task with ID ${taskId} has been deleted.`);
+
+    try {
+      const isDeleted = tasksAPI.deleteTask(taskId);
+      if (isDeleted) {
+        refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
+      } else {
+        throw new Error(`Task with ID ${taskId} was not found.`);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
   }
+
   if (btnEdit) {
     console.log('😍 Edit', btnEdit.dataset.task);
   }

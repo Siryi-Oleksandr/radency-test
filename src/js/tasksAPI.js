@@ -2,7 +2,8 @@ import { nanoid } from 'nanoid';
 
 export class TasksAPI {
   constructor(tasks) {
-    this.tasks = [];
+    this.tasks = tasks;
+    this.archivedTasks = [];
   }
 
   createTask(name, created, category, content) {
@@ -19,17 +20,21 @@ export class TasksAPI {
   }
 
   deleteTask(taskId) {
-    const taskIndex = this.tasks.findIndex(task => task.id === taskId);
+    this.tasks = this.tasks.filter(task => task.id !== taskId);
+    return true;
+  }
 
-    if (taskIndex !== -1) {
-      this.tasks.splice(taskIndex, 1);
-      return true;
-    } else {
-      return false;
-    }
+  archiveTask(taskId) {
+    this.archivedTasks.push(taskId);
+    this.deleteTask(taskId);
+    return true;
   }
 
   getTasks() {
     return this.tasks;
+  }
+
+  getArchivedTasks() {
+    return this.archivedTasks;
   }
 }
