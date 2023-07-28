@@ -26,7 +26,7 @@ export function createTableMarkup(tasks) {
   <tbody class="table__body">
    ${tasks
      .map(task => {
-       const { name, created, category, content, dates } = task;
+       const { id, name, created, category, content, dates } = task;
 
        return `<tr>
   <td>
@@ -42,17 +42,17 @@ export function createTableMarkup(tasks) {
   <td>${content}</td>
   <td>${dates}</td>
   <td class="options">
-    <button id="btn-edit" class="btn" type="button">
+    <button id="btn-edit" class="btn js-btn-edit" type="button" data-task=${id}>
       <svg class="icon" width="16" height="16">
         <use href="./images/sprite.svg#pencil"></use>
       </svg>
     </button>
-    <button id="btn-archiv" class="btn" type="button">
+    <button id="btn-archiv" class="btn js-btn-archiv" type="button" data-task=${id}>
       <svg class="icon" width="16" height="16">
         <use href="./images/sprite.svg#box-add"></use>
       </svg>
     </button>
-    <button id="btn-delete" class="btn" type="button">
+    <button id="btn-delete" class="btn js-btn-delete" type="button" data-task=${id}>
       <svg class="icon" width="16" height="16">
         <use href="./images/sprite.svg#bin"></use>
       </svg>

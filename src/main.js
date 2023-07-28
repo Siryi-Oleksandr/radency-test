@@ -2,6 +2,7 @@ import { refs } from './js/refs';
 import { tasks } from './js/tasks';
 import { createTableMarkup } from './js/notesTableMarkup';
 import { nanoid } from 'nanoid';
+const archivedTasks = [];
 
 refs.mainTable.innerHTML = createTableMarkup(tasks);
 
@@ -32,3 +33,35 @@ refs.formCreate.addEventListener('submit', function (event) {
   tasks.push(newTask);
   refs.mainTable.innerHTML = createTableMarkup(tasks);
 });
+
+refs.mainTable.addEventListener('click', handleOptions);
+
+function handleOptions(e) {
+  //   console.log('e.target', e.target);
+  //   console.log('e.target.closest', e.target.closest('#btn-delete'));
+
+  const btnDelete =
+    e.target.className === 'js-btn-delete'
+      ? e.target
+      : e.target.closest('#btn-delete');
+
+  const btnEdit =
+    e.target.className === 'js-btn-edit'
+      ? e.target
+      : e.target.closest('#btn-edit');
+
+  const btnArchiv =
+    e.target.className === 'js-btn-archiv'
+      ? e.target
+      : e.target.closest('#btn-archiv');
+
+  if (btnDelete) {
+    console.log('😎 Delete', btnDelete.dataset.task);
+  }
+  if (btnEdit) {
+    console.log('😍 Edit', btnEdit.dataset.task);
+  }
+  if (btnArchiv) {
+    console.log('🥰 Archiv', btnArchiv.dataset.task);
+  }
+}
