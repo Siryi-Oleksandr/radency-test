@@ -9,4 +9,8 @@ export const refs = {
 
   btnArchivAll: document.getElementById('btn-archiv-all'),
   btnDeleteAll: document.getElementById('btn-delete-all'),
+
+  formCreate: document.getElementById('form-create'),
+
+  modalOverlay: document.querySelector('.js-overlay-modal'),
 };

@@ -1,49 +1,69 @@
-form {
+.form {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  background-color: $txt-white-color;
+  border: 1px solid $border-color;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 label {
+  margin-bottom: 5px;
   display: block;
-  margin-bottom: 8px;
   font-weight: bold;
 }
 
 input[type='text'],
 input[type='date'],
-textarea {
+textarea,
+select {
   width: 100%;
   padding: 8px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid $border-color;
   border-radius: 4px;
-  box-sizing: border-box;
   resize: none;
-}
+  outline: none;
+  transition: border-color $animation;
 
-input[type='checkbox'] {
-  margin-right: 8px;
+  &:hover,
+  &:focus {
+    border-color: $border-active-color;
+  }
 }
 
 textarea {
-  resize: vertical;
-  height: 120px;
+  resize: none;
+  height: 60px;
 }
 
 input[type='submit'] {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4px 8px;
+
+  width: fit-content;
+
+  border: 1px solid $bg-btn-active-color;
   border-radius: 4px;
   cursor: pointer;
+
+  color: $txt-black-color;
+  background-color: bg-table-row-color;
+
+  transition: transform $animation, background-color $animation;
+
+  &:hover,
+  &:focus {
+    background-color: $bg-hover-color;
+    transform: scale(1.05);
+  }
 }
 
-input[type='submit']:hover {
-  background-color: #0056b3;
-}
+// input[type='submit']:hover {
+//   background-color: #0056b3;
+// }

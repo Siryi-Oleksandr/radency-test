@@ -1,16 +1,4 @@
-function getIcon(category) {
-  switch (category) {
-    case 'Task':
-      return 'cart';
-    case 'Random Thought':
-      return 'bubble';
-    case 'Idea':
-      return 'lightbulb';
-
-    default:
-      return 'lightbulb';
-  }
-}
+import { getIcon } from '../services/getIcon';
 
 export function createTableMarkup(tasks) {
   return `<table class="table">

@@ -1,5 +1,6 @@
 export const tasks = [
   {
+    id: '1',
     name: 'Shopping list',
     created: 'April 20, 2023',
     category: 'Task',
@@ -7,6 +8,7 @@ export const tasks = [
     dates: ['April 20, 2023', 'April 25, 2023'],
   },
   {
+    id: '2',
     name: 'New feature',
     created: 'April 30, 2023',
     category: 'Random Thought',
@@ -14,6 +16,7 @@ export const tasks = [
     dates: [],
   },
   {
+    id: '3',
     name: 'The theory of evolution',
     created: 'Mart 16, 2023',
     category: 'Idea',
@@ -21,6 +24,7 @@ export const tasks = [
     dates: [],
   },
   {
+    id: '4',
     name: 'Books',
     created: 'April 19, 2023',
     category: 'Task',
@@ -28,6 +32,7 @@ export const tasks = [
     dates: ['April 20, 2023', 'April 15, 2023'],
   },
   {
+    id: '5',
     name: 'Who is God',
     created: 'May 20, 2023',
     category: 'Random Thought',
@@ -35,6 +40,7 @@ export const tasks = [
     dates: [],
   },
   {
+    id: '6',
     name: 'Pet project',
     created: 'May 10, 2023',
     category: 'Idea',
@@ -42,6 +48,7 @@ export const tasks = [
     dates: [],
   },
   {
+    id: '7',
     name: 'Learn English',
     created: 'April 20, 2023',
     category: 'Idea',
