@@ -2,15 +2,15 @@ export const tasks = [
   {
     id: '1',
     name: 'Shopping list',
-    created: 'April 20, 2023',
+    created: '2023-07-30',
     category: 'Task',
     content: 'Tomatoes, bread',
-    dates: ['April 20, 2023', 'April 25, 2023'],
+    dates: ['2023-07-30', '2023-07-29'],
   },
   {
     id: '2',
     name: 'New feature',
-    created: 'April 30, 2023',
+    created: '2023-07-30',
     category: 'Random Thought',
     content: 'Amazing features',
     dates: [],
@@ -18,7 +18,7 @@ export const tasks = [
   {
     id: '3',
     name: 'The theory of evolution',
-    created: 'Mart 16, 2023',
+    created: '2023-07-30',
     category: 'Idea',
     content: 'It is something increadable',
     dates: [],
@@ -26,15 +26,15 @@ export const tasks = [
   {
     id: '4',
     name: 'Books',
-    created: 'April 19, 2023',
+    created: '2023-07-28',
     category: 'Task',
     content: 'Learn new material',
-    dates: ['April 20, 2023', 'April 15, 2023'],
+    dates: ['2023-07-28', '2023-07-30'],
   },
   {
     id: '5',
     name: 'Who is God',
-    created: 'May 20, 2023',
+    created: '2023-07-30',
     category: 'Random Thought',
     content: 'Who did create world?',
     dates: [],
@@ -42,7 +42,7 @@ export const tasks = [
   {
     id: '6',
     name: 'Pet project',
-    created: 'May 10, 2023',
+    created: '2023-07-30',
     category: 'Idea',
     content: 'Create portfolio application',
     dates: [],
@@ -50,9 +50,9 @@ export const tasks = [
   {
     id: '7',
     name: 'Learn English',
-    created: 'April 20, 2023',
+    created: '2023-07-30',
     category: 'Idea',
     content: 'Order new courses in English',
-    dates: ['April 20, 2023', 'April 25, 2023'],
+    dates: ['2023-07-30', '2023-08-02'],
   },
 ];
