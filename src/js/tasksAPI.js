@@ -24,9 +24,21 @@ export class TasksAPI {
     return true;
   }
 
+  deleteAllTasks() {
+    this.tasks = [];
+    return true;
+  }
+
   archiveTask(taskId) {
-    this.archivedTasks.push(taskId);
+    const archivedTask = this.tasks.find(task => task.id === taskId);
+    this.archivedTasks.push(archivedTask);
     this.deleteTask(taskId);
+    return true;
+  }
+
+  archiveAllTasks() {
+    this.archivedTasks.push(...this.tasks);
+    this.deleteAllTasks();
     return true;
   }
 
