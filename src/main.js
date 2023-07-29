@@ -3,11 +3,14 @@ import { tasks } from './js/tasks';
 import { createTableMarkup } from './js/notesTableMarkup';
 import { createArchivedTableMarkup } from './js/archivedTableMarkup';
 import { TasksAPI } from './js/TasksAPI';
+import { TaskCountObserver } from './js/TaskCountObserver';
 import { getFormValues } from './js/getFormValues';
 import { getOption, openModal, closeModal } from './services';
 import { editModalMarkup } from './js/editModalMarkup';
 
 const tasksAPI = new TasksAPI(tasks);
+const taskCountObserver = new TaskCountObserver(tasksAPI);
+tasksAPI.addObserver(taskCountObserver);
 
 refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks()); // Initial main table render
 
@@ -16,9 +19,6 @@ refs.formCreate.addEventListener('submit', handleFormCreateTask); // handle form
 refs.mainTable.addEventListener('click', handleOptions); // handle management each task throught the options
 
 refs.toggler.addEventListener('change', handleToggler); // show current notes or archive notes
-
-console.log(tasksAPI.getCountTasks());
-console.log(tasksAPI.getCountArchivedTasks());
 
 function handleFormCreateTask(e) {
   e.preventDefault();

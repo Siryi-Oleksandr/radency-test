@@ -1,4 +1,4 @@
-export function createSummaryTableMarkup() {
+export function createSummaryTableMarkup(tasks, archivedTasks) {
   return `<table class="table">
   <thead>
     <tr class="table__head">

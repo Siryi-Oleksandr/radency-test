@@ -1,5 +1,6 @@
 export const refs = {
   mainTable: document.getElementById('main-table'),
+  summaryTable: document.getElementById('summary-table'),
 
   btnCreate: document.getElementById('btn-create'),
 
