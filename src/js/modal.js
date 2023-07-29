@@ -1,5 +1,4 @@
 !(function (e) {
-  console.log('MODAL');
   'function' != typeof e.matches &&
     (e.matches =
       e.msMatchesSelector ||

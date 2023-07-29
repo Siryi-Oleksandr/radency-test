@@ -3,9 +3,7 @@ import { tasks } from './js/tasks';
 import { createTableMarkup } from './js/notesTableMarkup';
 import { TasksAPI } from './js/TasksAPI';
 import { getFormValues } from './js/getFormValues';
-import { getOption } from './services/getOption';
-import { closeModal } from './services/closeModal';
-import { openModal } from './services/openModal';
+import { getOption, openModal, closeModal } from './services';
 import { editModalMarkup } from './js/editModalMarkup';
 
 const tasksAPI = new TasksAPI(tasks);
@@ -15,8 +13,6 @@ refs.mainTable.innerHTML = createTableMarkup(tasks); // Initial main table rende
 refs.formCreate.addEventListener('submit', handleFormCreateTask); // handle form task create
 
 refs.mainTable.addEventListener('click', handleOptions); // handle management each task throught the options
-
-// refs.formEdit.addEventListener('submit', handleFormCreateTask); // handle form task edit
 
 function handleFormCreateTask(e) {
   e.preventDefault();

@@ -50,12 +50,15 @@ export class TasksAPI {
       created: updatedTask.created,
       category: updatedTask.category,
       content: updatedTask.content,
-      dates: updatedTask.dates,
     };
 
-    // if (created !== updatedTask.created) {
-    //   newTask.dates.push(updatedTask.created);
-    // }
+    const currentTask = this.getTaskById(taskId);
+
+    if (currentTask.created !== updatedTask.created) {
+      newTask.dates = [...currentTask.dates, updatedTask.created];
+    } else {
+      newTask.dates = [...currentTask.dates];
+    }
 
     const taskIndex = this.tasks.findIndex(task => task.id === taskId);
     if (taskIndex === -1) {

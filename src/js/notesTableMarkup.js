@@ -1,4 +1,4 @@
-import { getIcon } from '../services/getIcon';
+import { getIcon, showDates, cutString } from '../services';
 
 export function createTableMarkup(tasks) {
   return `<table class="table">
@@ -36,11 +36,11 @@ export function createTableMarkup(tasks) {
       </svg>
     </span>
   </td>
-  <td>${name}</td>
+  <td>${cutString(name)}</td>
   <td>${created}</td>
   <td>${category}</td>
-  <td>${content}</td>
-  <td>${dates}</td>
+  <td>${cutString(content)}</td>
+  <td>${dates?.length > 1 ? showDates(dates) : ''}</td>
   <td class="options">
     <button id="btn-edit" class="btn js-btn-edit js-open-modal" type="button" data-task=${id} data-modal="2">
       <svg class="icon" width="16" height="16">
