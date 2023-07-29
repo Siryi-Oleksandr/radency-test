@@ -17,9 +17,12 @@ export class TasksAPI {
     }, initialCount);
   }
 
+  #tasks;
+  #archivedTasks;
+
   constructor(tasks) {
-    this.tasks = tasks;
-    this.archivedTasks = [];
+    this.#tasks = tasks;
+    this.#archivedTasks = [];
   }
 
   createTask(name, created, category, content) {
@@ -32,29 +35,29 @@ export class TasksAPI {
       dates: [created],
     };
 
-    this.tasks.push(newTask);
+    this.#tasks.push(newTask);
     return newTask;
   }
 
   deleteTask(taskId) {
-    this.tasks = this.tasks.filter(task => task.id !== taskId);
+    this.#tasks = this.#tasks.filter(task => task.id !== taskId);
     return true;
   }
 
   deleteAllTasks() {
-    this.tasks = [];
+    this.#tasks = [];
     return true;
   }
 
   archiveTask(taskId) {
-    const archivedTask = this.tasks.find(task => task.id === taskId);
-    this.archivedTasks.push(archivedTask);
+    const archivedTask = this.#tasks.find(task => task.id === taskId);
+    this.#archivedTasks.push(archivedTask);
     this.deleteTask(taskId);
     return true;
   }
 
   archiveAllTasks() {
-    this.archivedTasks.push(...this.tasks);
+    this.#archivedTasks.push(...this.#tasks);
     this.deleteAllTasks();
     return true;
   }
@@ -76,41 +79,47 @@ export class TasksAPI {
       newTask.dates = [...currentTask.dates];
     }
 
-    const taskIndex = this.tasks.findIndex(task => task.id === taskId);
+    const taskIndex = this.#tasks.findIndex(task => task.id === taskId);
     if (taskIndex === -1) {
       console.error('Task not found');
     }
 
-    this.tasks.splice(taskIndex, 1, newTask);
+    this.#tasks.splice(taskIndex, 1, newTask);
     return true;
   }
 
   unzipTask(taskId) {
-    const unzipedTask = this.archivedTasks.find(task => task.id === taskId);
-    this.tasks.push(unzipedTask);
-    this.archivedTasks = this.archivedTasks.filter(task => task.id !== taskId);
+    const unzipedTask = this.#archivedTasks.find(task => task.id === taskId);
+    this.#tasks.push(unzipedTask);
+    this.#archivedTasks = this.#archivedTasks.filter(
+      task => task.id !== taskId
+    );
     return true;
   }
 
   unzipAllTasks() {
-    this.tasks.push(...this.archivedTasks);
-    this.archivedTasks = [];
+    this.#tasks.push(...this.#archivedTasks);
+    this.#archivedTasks = [];
     return true;
   }
 
   getTasks() {
-    return this.tasks;
+    return this.#tasks;
   }
 
   getTaskById(taskId) {
-    return this.tasks.find(task => task.id === taskId);
+    return this.#tasks.find(task => task.id === taskId);
   }
 
   getArchivedTasks() {
-    return this.archivedTasks;
+    return this.#archivedTasks;
   }
 
   getCountTasks() {
-    return TasksAPI._countTasksByCategory(this.tasks);
+    return TasksAPI._countTasksByCategory(this.#tasks);
+  }
+
+  getCountArchivedTasks() {
+    return TasksAPI._countTasksByCategory(this.#archivedTasks);
   }
 }
