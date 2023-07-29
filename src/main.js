@@ -7,12 +7,17 @@ import { TaskCountObserver } from './js/TaskCountObserver';
 import { getFormValues } from './js/getFormValues';
 import { getOption, openModal, closeModal } from './services';
 import { editModalMarkup } from './js/editModalMarkup';
+import { createSummaryTableMarkup } from './js/summaryTableMarkup';
 
 const tasksAPI = new TasksAPI(tasks);
 const taskCountObserver = new TaskCountObserver(tasksAPI);
 tasksAPI.addObserver(taskCountObserver);
 
 refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks()); // Initial main table render
+refs.summaryTable.innerHTML = createSummaryTableMarkup(
+  tasksAPI.getCountTasks(),
+  tasksAPI.getCountArchivedTasks()
+); // Initial summary table render
 
 refs.formCreate.addEventListener('submit', handleFormCreateTask); // handle form task create
 
@@ -33,6 +38,10 @@ function handleFormCreateTask(e) {
 
     tasksAPI.createTask(name, created, category, content);
     refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
+    refs.summaryTable.innerHTML = createSummaryTableMarkup(
+      tasksAPI.getCountTasks(),
+      tasksAPI.getCountArchivedTasks()
+    );
     closeModal(refs.formCreate);
   } catch (error) {
     console.error('Error:', error.message);
@@ -52,10 +61,11 @@ function handleFormEditTask(e, refForm, taskId) {
 
     tasksAPI.editTask(taskId, formValues);
     refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
+    refs.summaryTable.innerHTML = createSummaryTableMarkup(
+      tasksAPI.getCountTasks(),
+      tasksAPI.getCountArchivedTasks()
+    );
     closeModal(refForm);
-
-    // tasksAPI.createTask(name, created, category, content);
-    // refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
   } catch (error) {
     console.error('Error:', error.message);
   }
@@ -79,6 +89,10 @@ function handleOptions(e) {
       const isDeleted = tasksAPI.deleteTask(taskId);
       if (isDeleted) {
         refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
+        refs.summaryTable.innerHTML = createSummaryTableMarkup(
+          tasksAPI.getCountTasks(),
+          tasksAPI.getCountArchivedTasks()
+        );
       } else {
         throw new Error(`Task with ID ${taskId} was not found.`);
       }
@@ -107,6 +121,10 @@ function handleOptions(e) {
       const isArchived = tasksAPI.archiveTask(taskId);
       if (isArchived) {
         refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
+        refs.summaryTable.innerHTML = createSummaryTableMarkup(
+          tasksAPI.getCountTasks(),
+          tasksAPI.getCountArchivedTasks()
+        );
       } else {
         throw new Error(`Task with ID ${taskId} was not found.`);
       }
@@ -118,6 +136,10 @@ function handleOptions(e) {
   if (btnArchiveAll) {
     tasksAPI.archiveAllTasks();
     refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
+    refs.summaryTable.innerHTML = createSummaryTableMarkup(
+      tasksAPI.getCountTasks(),
+      tasksAPI.getCountArchivedTasks()
+    );
   }
 
   if (btnUnzip) {
@@ -128,6 +150,10 @@ function handleOptions(e) {
       if (isUnziped) {
         refs.mainTable.innerHTML = createArchivedTableMarkup(
           tasksAPI.getArchivedTasks()
+        );
+        refs.summaryTable.innerHTML = createSummaryTableMarkup(
+          tasksAPI.getCountTasks(),
+          tasksAPI.getCountArchivedTasks()
         );
       } else {
         throw new Error(`Task with ID ${taskId} was not found.`);
@@ -142,11 +168,19 @@ function handleOptions(e) {
     refs.mainTable.innerHTML = createArchivedTableMarkup(
       tasksAPI.getArchivedTasks()
     );
+    refs.summaryTable.innerHTML = createSummaryTableMarkup(
+      tasksAPI.getCountTasks(),
+      tasksAPI.getCountArchivedTasks()
+    );
   }
 
   if (btnDeleteAll) {
     tasksAPI.deleteAllTasks();
     refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
+    refs.summaryTable.innerHTML = createSummaryTableMarkup(
+      tasksAPI.getCountTasks(),
+      tasksAPI.getCountArchivedTasks()
+    );
   }
 }
 
