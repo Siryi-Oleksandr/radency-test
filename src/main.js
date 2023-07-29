@@ -14,13 +14,37 @@ refs.formCreate.addEventListener('submit', handleFormCreateTask); // handle form
 
 refs.mainTable.addEventListener('click', handleOptions); // handle management each task throught the options
 
-refs.formEdit.addEventListener('submit', handleFormCreateTask); // handle form task create
+// refs.formEdit.addEventListener('submit', handleFormCreateTask); // handle form task edit
 
 function handleFormCreateTask(e) {
   e.preventDefault();
 
   try {
     const formValues = getFormValues(refs.formCreate);
+    const { name, created, category, content } = formValues;
+
+    if (!name || !created || !category || !content) {
+      throw new Error('All fields are required.');
+    }
+
+    refs.formCreate.reset();
+    // close modals
+    var parentModal = this.closest('.modal');
+    parentModal.classList.remove('active');
+    refs.modalOverlay.classList.remove('active');
+
+    tasksAPI.createTask(name, created, category, content);
+    refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
+}
+
+function handleFormEditTask(e) {
+  e.preventDefault();
+
+  try {
+    const formValues = getFormValues(refs.formEdit);
     const { name, created, category, content } = formValues;
 
     if (!name || !created || !category || !content) {
@@ -61,8 +85,12 @@ function handleOptions(e) {
   if (btnEdit) {
     console.log('😍 Edit', btnEdit.dataset.task); // TODO
     const taskId = btnEdit.dataset.task;
-    console.log(editModalMarkup(tasksAPI.getTaskById(taskId)));
-    // refs.formEdit.innerHTML = editModalMarkup(tasksAPI.getTaskById(taskId));
+    // console.log(editModalMarkup(tasksAPI.getTaskById(taskId)));
+    refs.formEditContainer.innerHTML = editModalMarkup(
+      tasksAPI.getTaskById(taskId)
+    );
+    const formEdit = document.getElementById('form-edit');
+    formEdit.addEventListener('submit', handleFormCreateTask); // handle form task edit
   }
 
   if (btnArchive) {

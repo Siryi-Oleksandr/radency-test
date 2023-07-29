@@ -11,7 +11,8 @@ export const refs = {
   btnDeleteAll: document.getElementById('btn-delete-all'),
 
   formCreate: document.getElementById('form-create'),
-  formEdit: document.getElementById('form-edit'),
+  // formEdit: document.getElementById('form-edit'),
+  formEditContainer: document.getElementById('form-edit-container'),
 
   modalOverlay: document.querySelector('.js-overlay-modal'),
 };
