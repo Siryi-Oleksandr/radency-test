@@ -5,6 +5,7 @@ import { TasksAPI } from './js/TasksAPI';
 import { getFormValues } from './js/getFormValues';
 import { getOption } from './services/getOption';
 import { closeModal } from './services/closeModal';
+import { openModal } from './services/openModal';
 import { editModalMarkup } from './js/editModalMarkup';
 
 const tasksAPI = new TasksAPI(tasks);
@@ -39,11 +40,6 @@ function handleFormCreateTask(e) {
 function handleFormEditTask(e, refForm, taskId) {
   e.preventDefault();
 
-  // if (!refForm) {
-  //   console.log('😫 no link to edit task');
-  //   return;
-  // }
-
   try {
     const formValues = getFormValues(refForm);
     const { name, created, category, content } = formValues;
@@ -52,7 +48,8 @@ function handleFormEditTask(e, refForm, taskId) {
       throw new Error('All fields are required.');
     }
 
-    console.log('All GOOD', name, created, category, content);
+    tasksAPI.editTask(taskId, formValues);
+    refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
     closeModal(refForm);
 
     // tasksAPI.createTask(name, created, category, content);
@@ -87,8 +84,9 @@ function handleOptions(e) {
     );
 
     const refFormEdit = document.getElementById('form-edit');
+    openModal(refFormEdit);
     refFormEdit.addEventListener('submit', e =>
-      handleFormEditTask(e, refFormEdit)
+      handleFormEditTask(e, refFormEdit, taskId)
     ); // handle form task edit
   }
 

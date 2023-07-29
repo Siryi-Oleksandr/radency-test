@@ -13,8 +13,9 @@ export class TasksAPI {
       created,
       category,
       content,
-      dates: [],
+      dates: [created],
     };
+
     this.tasks.push(newTask);
     return newTask;
   }
@@ -39,6 +40,29 @@ export class TasksAPI {
   archiveAllTasks() {
     this.archivedTasks.push(...this.tasks);
     this.deleteAllTasks();
+    return true;
+  }
+
+  editTask(taskId, updatedTask) {
+    const newTask = {
+      id: taskId,
+      name: updatedTask.name,
+      created: updatedTask.created,
+      category: updatedTask.category,
+      content: updatedTask.content,
+      dates: updatedTask.dates,
+    };
+
+    // if (created !== updatedTask.created) {
+    //   newTask.dates.push(updatedTask.created);
+    // }
+
+    const taskIndex = this.tasks.findIndex(task => task.id === taskId);
+    if (taskIndex === -1) {
+      console.error('Task not found');
+    }
+
+    this.tasks.splice(taskIndex, 1, newTask);
     return true;
   }
 

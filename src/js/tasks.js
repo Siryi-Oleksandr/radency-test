@@ -13,7 +13,7 @@ export const tasks = [
     created: '2023-07-30',
     category: 'Random Thought',
     content: 'Amazing features',
-    dates: [],
+    dates: ['2023-07-30'],
   },
   {
     id: '3',
@@ -21,7 +21,7 @@ export const tasks = [
     created: '2023-07-30',
     category: 'Idea',
     content: 'It is something increadable',
-    dates: [],
+    dates: ['2023-07-30'],
   },
   {
     id: '4',
@@ -37,7 +37,7 @@ export const tasks = [
     created: '2023-07-30',
     category: 'Random Thought',
     content: 'Who did create world?',
-    dates: [],
+    dates: ['2023-07-30'],
   },
   {
     id: '6',
@@ -45,7 +45,7 @@ export const tasks = [
     created: '2023-07-30',
     category: 'Idea',
     content: 'Create portfolio application',
-    dates: [],
+    dates: ['2023-07-30'],
   },
   {
     id: '7',
