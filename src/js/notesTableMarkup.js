@@ -42,12 +42,12 @@ export function createTableMarkup(tasks) {
   <td>${content}</td>
   <td>${dates}</td>
   <td class="options">
-    <button id="btn-edit" class="btn js-btn-edit" type="button" data-task=${id}>
+    <button id="btn-edit" class="btn js-btn-edit js-open-modal" type="button" data-task=${id} data-modal="2">
       <svg class="icon" width="16" height="16">
         <use href="./images/sprite.svg#pencil"></use>
       </svg>
     </button>
-    <button id="btn-archiv" class="btn js-btn-archiv" type="button" data-task=${id}>
+    <button id="btn-archive" class="btn js-btn-archive" type="button" data-task=${id}>
       <svg class="icon" width="16" height="16">
         <use href="./images/sprite.svg#box-add"></use>
       </svg>

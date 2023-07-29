@@ -4,12 +4,19 @@ import { createTableMarkup } from './js/notesTableMarkup';
 import { TasksAPI } from './js/TasksAPI';
 import { getFormValues } from './js/getFormValues';
 import { getOption } from './services/getOption';
+import { editModalMarkup } from './js/editModalMarkup';
 
 const tasksAPI = new TasksAPI(tasks);
 
-refs.mainTable.innerHTML = createTableMarkup(tasks);
+refs.mainTable.innerHTML = createTableMarkup(tasks); // Initial main table render
 
-refs.formCreate.addEventListener('submit', function (e) {
+refs.formCreate.addEventListener('submit', handleFormCreateTask); // handle form task create
+
+refs.mainTable.addEventListener('click', handleOptions); // handle management each task throught the options
+
+refs.formEdit.addEventListener('submit', handleFormCreateTask); // handle form task create
+
+function handleFormCreateTask(e) {
   e.preventDefault();
 
   try {
@@ -31,12 +38,10 @@ refs.formCreate.addEventListener('submit', function (e) {
   } catch (error) {
     console.error('Error:', error.message);
   }
-});
-
-refs.mainTable.addEventListener('click', handleOptions);
+}
 
 function handleOptions(e) {
-  const { btnArchiv, btnDelete, btnEdit } = getOption(e);
+  const { btnArchive, btnDelete, btnEdit } = getOption(e);
 
   if (btnDelete) {
     const taskId = btnDelete.dataset.task;
@@ -54,17 +59,20 @@ function handleOptions(e) {
   }
 
   if (btnEdit) {
-    console.log('😍 Edit', btnEdit.dataset.task);
+    console.log('😍 Edit', btnEdit.dataset.task); // TODO
+    const taskId = btnEdit.dataset.task;
+    console.log(editModalMarkup(tasksAPI.getTaskById(taskId)));
+    // refs.formEdit.innerHTML = editModalMarkup(tasksAPI.getTaskById(taskId));
   }
 
-  if (btnArchiv) {
-    const taskId = btnArchiv.dataset.task;
+  if (btnArchive) {
+    const taskId = btnArchive.dataset.task;
 
     try {
       const isArchived = tasksAPI.archiveTask(taskId);
       if (isArchived) {
         refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
-        console.log('😎', tasksAPI.getArchivedTasks());
+        console.log('😎', tasksAPI.getArchivedTasks()); // TODO
       } else {
         throw new Error(`Task with ID ${taskId} was not found.`);
       }

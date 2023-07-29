@@ -9,10 +9,10 @@ export function getOption(e) {
       ? e.target
       : e.target.closest('#btn-edit');
 
-  const btnArchiv =
-    e.target.className === 'js-btn-archiv'
+  const btnArchive =
+    e.target.className === 'js-btn-archive'
       ? e.target
-      : e.target.closest('#btn-archiv');
+      : e.target.closest('#btn-archive');
 
-  return { btnArchiv, btnDelete, btnEdit };
+  return { btnArchive, btnDelete, btnEdit };
 }

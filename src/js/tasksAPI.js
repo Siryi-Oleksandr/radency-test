@@ -46,6 +46,10 @@ export class TasksAPI {
     return this.tasks;
   }
 
+  getTaskById(taskId) {
+    return this.tasks.find(task => task.id === taskId);
+  }
+
   getArchivedTasks() {
     return this.archivedTasks;
   }
