@@ -4,6 +4,7 @@ import { createTableMarkup } from './js/notesTableMarkup';
 import { TasksAPI } from './js/TasksAPI';
 import { getFormValues } from './js/getFormValues';
 import { getOption } from './services/getOption';
+import { closeModal } from './services/closeModal';
 import { editModalMarkup } from './js/editModalMarkup';
 
 const tasksAPI = new TasksAPI(tasks);
@@ -27,38 +28,35 @@ function handleFormCreateTask(e) {
       throw new Error('All fields are required.');
     }
 
-    refs.formCreate.reset();
-    // close modals
-    var parentModal = this.closest('.modal');
-    parentModal.classList.remove('active');
-    refs.modalOverlay.classList.remove('active');
-
     tasksAPI.createTask(name, created, category, content);
     refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
+    closeModal(refs.formCreate);
   } catch (error) {
     console.error('Error:', error.message);
   }
 }
 
-function handleFormEditTask(e) {
+function handleFormEditTask(e, refForm, taskId) {
   e.preventDefault();
 
+  // if (!refForm) {
+  //   console.log('😫 no link to edit task');
+  //   return;
+  // }
+
   try {
-    const formValues = getFormValues(refs.formEdit);
+    const formValues = getFormValues(refForm);
     const { name, created, category, content } = formValues;
 
     if (!name || !created || !category || !content) {
       throw new Error('All fields are required.');
     }
 
-    refs.formCreate.reset();
-    // close modals
-    var parentModal = this.closest('.modal');
-    parentModal.classList.remove('active');
-    refs.modalOverlay.classList.remove('active');
+    console.log('All GOOD', name, created, category, content);
+    closeModal(refForm);
 
-    tasksAPI.createTask(name, created, category, content);
-    refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
+    // tasksAPI.createTask(name, created, category, content);
+    // refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
   } catch (error) {
     console.error('Error:', error.message);
   }
@@ -83,14 +81,15 @@ function handleOptions(e) {
   }
 
   if (btnEdit) {
-    console.log('😍 Edit', btnEdit.dataset.task); // TODO
     const taskId = btnEdit.dataset.task;
-    // console.log(editModalMarkup(tasksAPI.getTaskById(taskId)));
     refs.formEditContainer.innerHTML = editModalMarkup(
       tasksAPI.getTaskById(taskId)
     );
-    const formEdit = document.getElementById('form-edit');
-    formEdit.addEventListener('submit', handleFormCreateTask); // handle form task edit
+
+    const refFormEdit = document.getElementById('form-edit');
+    refFormEdit.addEventListener('submit', e =>
+      handleFormEditTask(e, refFormEdit)
+    ); // handle form task edit
   }
 
   if (btnArchive) {
