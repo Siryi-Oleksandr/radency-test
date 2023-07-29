@@ -1,6 +1,7 @@
 import { refs } from './js/refs';
 import { tasks } from './js/tasks';
 import { createTableMarkup } from './js/notesTableMarkup';
+import { createArchivedTableMarkup } from './js/archivedTableMarkup';
 import { TasksAPI } from './js/TasksAPI';
 import { getFormValues } from './js/getFormValues';
 import { getOption, openModal, closeModal } from './services';
@@ -8,11 +9,13 @@ import { editModalMarkup } from './js/editModalMarkup';
 
 const tasksAPI = new TasksAPI(tasks);
 
-refs.mainTable.innerHTML = createTableMarkup(tasks); // Initial main table render
+refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks()); // Initial main table render
 
 refs.formCreate.addEventListener('submit', handleFormCreateTask); // handle form task create
 
 refs.mainTable.addEventListener('click', handleOptions); // handle management each task throught the options
+
+refs.toggler.addEventListener('change', handleToggler); // show current notes or archive notes
 
 function handleFormCreateTask(e) {
   e.preventDefault();
@@ -56,7 +59,15 @@ function handleFormEditTask(e, refForm, taskId) {
 }
 
 function handleOptions(e) {
-  const { btnArchive, btnDelete, btnEdit } = getOption(e);
+  const {
+    btnArchive,
+    btnDelete,
+    btnEdit,
+    btnUnzip,
+    btnDeleteAll,
+    btnArchiveAll,
+    btnUnzipAll,
+  } = getOption(e);
 
   if (btnDelete) {
     const taskId = btnDelete.dataset.task;
@@ -93,12 +104,57 @@ function handleOptions(e) {
       const isArchived = tasksAPI.archiveTask(taskId);
       if (isArchived) {
         refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
-        console.log('😎', tasksAPI.getArchivedTasks()); // TODO
       } else {
         throw new Error(`Task with ID ${taskId} was not found.`);
       }
     } catch (error) {
       console.error('Error:', error.message);
     }
+  }
+
+  if (btnArchiveAll) {
+    tasksAPI.archiveAllTasks();
+    refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
+  }
+
+  if (btnUnzip) {
+    const taskId = btnUnzip.dataset.task;
+
+    try {
+      const isUnziped = tasksAPI.unzipTask(taskId);
+      if (isUnziped) {
+        refs.mainTable.innerHTML = createArchivedTableMarkup(
+          tasksAPI.getArchivedTasks()
+        );
+      } else {
+        throw new Error(`Task with ID ${taskId} was not found.`);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  }
+
+  if (btnUnzipAll) {
+    tasksAPI.unzipAllTasks();
+    refs.mainTable.innerHTML = createArchivedTableMarkup(
+      tasksAPI.getArchivedTasks()
+    );
+  }
+
+  if (btnDeleteAll) {
+    tasksAPI.deleteAllTasks();
+    refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
+  }
+}
+
+function handleToggler() {
+  const isChecked = this.checked;
+
+  if (isChecked) {
+    refs.mainTable.innerHTML = createArchivedTableMarkup(
+      tasksAPI.getArchivedTasks()
+    );
+  } else {
+    refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
   }
 }

@@ -69,6 +69,19 @@ export class TasksAPI {
     return true;
   }
 
+  unzipTask(taskId) {
+    const unzipedTask = this.archivedTasks.find(task => task.id === taskId);
+    this.tasks.push(unzipedTask);
+    this.archivedTasks = this.archivedTasks.filter(task => task.id !== taskId);
+    return true;
+  }
+
+  unzipAllTasks() {
+    this.tasks.push(...this.archivedTasks);
+    this.archivedTasks = [];
+    return true;
+  }
+
   getTasks() {
     return this.tasks;
   }

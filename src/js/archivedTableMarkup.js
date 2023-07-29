@@ -1,6 +1,6 @@
 import { getIcon, showDates, cutString } from '../services';
 
-export function createTableMarkup(tasks) {
+export function createArchivedTableMarkup(tasks) {
   return `<table class="table">
   <thead>
     <tr class="table__head">
@@ -11,16 +11,12 @@ export function createTableMarkup(tasks) {
       <th>Content</th>
       <th>Dates</th>
       <th class="options-wrapper">
-        <button id="btn-archive-all" class="btn btn--head js-btn-archive-all" type="button">
+        <button id="btn-unzip-all" class="btn btn--head js-btn-unzip-all" type="button">
           <svg class="icon" width="16" height="16">
-            <use href="./images/sprite.svg#box-add"></use>
+            <use href="./images/sprite.svg#box-remove"></use>
           </svg>
         </button>
-        <button id="btn-delete-all" class="btn btn--head js-btn-delete-all" type="button">
-          <svg class="icon" width="16" height="16">
-            <use href="./images/sprite.svg#bin"></use>
-          </svg>
-        </button></th>
+       </th>
     </tr>
   </thead>
   <tbody class="table__body">
@@ -42,19 +38,9 @@ export function createTableMarkup(tasks) {
   <td>${cutString(content)}</td>
   <td>${dates?.length > 1 ? showDates(dates) : ''}</td>
   <td class="options">
-    <button id="btn-edit" class="btn js-btn-edit js-open-modal" type="button" data-task=${id} data-modal="2">
+    <button id="btn-unzip" class="btn js-btn-unzip" type="button" data-task=${id}>
       <svg class="icon" width="16" height="16">
-        <use href="./images/sprite.svg#pencil"></use>
-      </svg>
-    </button>
-    <button id="btn-archive" class="btn js-btn-archive" type="button" data-task=${id}>
-      <svg class="icon" width="16" height="16">
-        <use href="./images/sprite.svg#box-add"></use>
-      </svg>
-    </button>
-    <button id="btn-delete" class="btn js-btn-delete" type="button" data-task=${id}>
-      <svg class="icon" width="16" height="16">
-        <use href="./images/sprite.svg#bin"></use>
+        <use href="./images/sprite.svg#box-remove"></use>
       </svg>
     </button>
   </td>

@@ -13,6 +13,7 @@ export const refs = {
   formCreate: document.getElementById('form-create'),
   // formEdit: document.getElementById('form-edit'),
   formEditContainer: document.getElementById('form-edit-container'),
+  toggler: document.getElementById('toggler'),
 
   modalOverlay: document.querySelector('.js-overlay-modal'),
 };
