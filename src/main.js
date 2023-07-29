@@ -17,6 +17,8 @@ refs.mainTable.addEventListener('click', handleOptions); // handle management ea
 
 refs.toggler.addEventListener('change', handleToggler); // show current notes or archive notes
 
+console.log(tasksAPI.getCountTasks());
+
 function handleFormCreateTask(e) {
   e.preventDefault();
 
