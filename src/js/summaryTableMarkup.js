@@ -1,6 +1,4 @@
 export function createSummaryTableMarkup(tasks, archivedTasks) {
-  console.log(tasks);
-  console.log(archivedTasks);
   return ` <table class="table table--summary">
     <thead>
       <tr class="table__head">

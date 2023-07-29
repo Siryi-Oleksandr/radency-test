@@ -3,15 +3,12 @@ import { tasks } from './js/tasks';
 import { createTableMarkup } from './js/notesTableMarkup';
 import { createArchivedTableMarkup } from './js/archivedTableMarkup';
 import { TasksAPI } from './js/TasksAPI';
-import { TaskCountObserver } from './js/TaskCountObserver';
 import { getFormValues } from './js/getFormValues';
 import { getOption, openModal, closeModal } from './services';
 import { editModalMarkup } from './js/editModalMarkup';
 import { createSummaryTableMarkup } from './js/summaryTableMarkup';
 
 const tasksAPI = new TasksAPI(tasks);
-const taskCountObserver = new TaskCountObserver(tasksAPI);
-tasksAPI.addObserver(taskCountObserver);
 
 refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks()); // Initial main table render
 refs.summaryTable.innerHTML = createSummaryTableMarkup(
