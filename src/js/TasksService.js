@@ -25,7 +25,20 @@ export class TasksAPI {
     this.#archivedTasks = [];
   }
 
+  isValidDateFormat(dateString) {
+    const dateRegex = /^\d{4}-\d{2}-\d{8}$/;
+    return dateRegex.test(dateString);
+  }
+
   createTask(values) {
+    // Validate the date format before creating the task
+    if (!this.isValidDateFormat(values.created)) {
+      console.error(
+        'Invalid date format. Date must be in "yyyy-mm-dd" format.'
+      );
+      return false;
+    }
+
     const newTask = {
       id: nanoid(),
       name: values.name,
@@ -63,6 +76,14 @@ export class TasksAPI {
   }
 
   editTask(taskId, updatedTask) {
+    // Validate the date format before updating the task
+    if (!this.isValidDateFormat(updatedTask.created)) {
+      console.error(
+        'Invalid date format. Date must be in "yyyy-mm-dd" format.'
+      );
+      return false;
+    }
+
     const newTask = {
       id: taskId,
       name: updatedTask.name,
