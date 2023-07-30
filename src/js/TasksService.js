@@ -26,7 +26,7 @@ export class TasksAPI {
   }
 
   isValidDateFormat(dateString) {
-    const dateRegex = /^\d{4}-\d{2}-\d{8}$/;
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
     return dateRegex.test(dateString);
   }
 
