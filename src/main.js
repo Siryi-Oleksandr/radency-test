@@ -2,7 +2,7 @@ import { refs } from './js/refs';
 import { tasks } from './js/tasks';
 import { createTableMarkup } from './js/notesTableMarkup';
 import { createArchivedTableMarkup } from './js/archivedTableMarkup';
-import { TasksAPI } from './js/TasksAPI';
+import { TasksAPI } from './js/TasksService';
 import { getFormValues } from './js/getFormValues';
 import { getOption, openModal, closeModal } from './services';
 import { editModalMarkup } from './js/editModalMarkup';
@@ -33,7 +33,7 @@ function handleFormCreateTask(e) {
       throw new Error('All fields are required.');
     }
 
-    tasksAPI.createTask(name, created, category, content);
+    tasksAPI.createTask(formValues);
     refs.mainTable.innerHTML = createTableMarkup(tasksAPI.getTasks());
     refs.summaryTable.innerHTML = createSummaryTableMarkup(
       tasksAPI.getCountTasks(),

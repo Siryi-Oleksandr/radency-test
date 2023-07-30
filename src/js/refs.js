@@ -12,7 +12,6 @@ export const refs = {
   btnDeleteAll: document.getElementById('btn-delete-all'),
 
   formCreate: document.getElementById('form-create'),
-  // formEdit: document.getElementById('form-edit'),
   formEditContainer: document.getElementById('form-edit-container'),
   toggler: document.getElementById('toggler'),
 

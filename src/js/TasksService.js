@@ -25,14 +25,14 @@ export class TasksAPI {
     this.#archivedTasks = [];
   }
 
-  createTask(name, created, category, content) {
+  createTask(values) {
     const newTask = {
       id: nanoid(),
-      name,
-      created,
-      category,
-      content,
-      dates: [created],
+      name: values.name,
+      created: values.created,
+      category: values.category,
+      content: values.content,
+      dates: [values.created],
     };
 
     this.#tasks.push(newTask);

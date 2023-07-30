@@ -51,7 +51,7 @@ export const tasks = [
     id: '7',
     name: 'Learn English',
     created: '2023-07-30',
-    category: 'Idea',
+    category: 'Task',
     content: 'Order new courses in English',
     dates: ['2023-07-30', '2023-08-02'],
   },
