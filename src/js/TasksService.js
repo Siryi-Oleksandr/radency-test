@@ -17,6 +17,37 @@ export class TasksAPI {
     }, initialCount);
   }
 
+  static _createFormatedDate() {
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+
+    const currentDate = new Date();
+    const month = months[currentDate.getMonth()];
+    const day = currentDate.getDate();
+    const year = currentDate.getFullYear();
+
+    return `${month} ${day}, ${year}`;
+  }
+
+  static _parseDates(str) {
+    const dateRegex = /\b(\d{1,2})\/(\d{1,2})\/(\d{4})\b/g;
+    const datesFound = str.match(dateRegex);
+
+    return datesFound || [];
+  }
+
   #tasks;
   #archivedTasks;
 
@@ -25,27 +56,14 @@ export class TasksAPI {
     this.#archivedTasks = [];
   }
 
-  isValidDateFormat(dateString) {
-    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-    return dateRegex.test(dateString);
-  }
-
   createTask(values) {
-    // Validate the date format before creating the task
-    if (!this.isValidDateFormat(values.created)) {
-      console.error(
-        'Invalid date format. Date must be in "yyyy-mm-dd" format.'
-      );
-      return false;
-    }
-
     const newTask = {
       id: nanoid(),
       name: values.name,
-      created: values.created,
+      created: TasksAPI._createFormatedDate(),
       category: values.category,
       content: values.content,
-      dates: [values.created],
+      dates: TasksAPI._parseDates(values.content),
     };
 
     this.#tasks.push(newTask);
@@ -76,29 +94,14 @@ export class TasksAPI {
   }
 
   editTask(taskId, updatedTask) {
-    // Validate the date format before updating the task
-    if (!this.isValidDateFormat(updatedTask.created)) {
-      console.error(
-        'Invalid date format. Date must be in "yyyy-mm-dd" format.'
-      );
-      return false;
-    }
-
     const newTask = {
       id: taskId,
       name: updatedTask.name,
-      created: updatedTask.created,
+      created: TasksAPI._createFormatedDate(),
       category: updatedTask.category,
       content: updatedTask.content,
+      dates: TasksAPI._parseDates(updatedTask.content),
     };
-
-    const currentTask = this.getTaskById(taskId);
-
-    if (currentTask.created !== updatedTask.created) {
-      newTask.dates = [...currentTask.dates, updatedTask.created];
-    } else {
-      newTask.dates = [...currentTask.dates];
-    }
 
     const taskIndex = this.#tasks.findIndex(task => task.id === taskId);
     if (taskIndex === -1) {

@@ -40,7 +40,7 @@ export function createTableMarkup(tasks) {
   <td>${created}</td>
   <td>${category}</td>
   <td>${cutString(content)}</td>
-  <td>${dates?.length > 1 ? showDates(dates) : ''}</td>
+  <td>${showDates(dates)}</td>
   <td class="options">
     <button id="btn-edit" class="btn js-btn-edit js-open-modal" type="button" data-task=${id} data-modal="2">
       <svg class="icon" width="16" height="16">

@@ -27,9 +27,9 @@ function handleFormCreateTask(e) {
 
   try {
     const formValues = getFormValues(refs.formCreate);
-    const { name, created, category, content } = formValues;
+    const { name, category, content } = formValues;
 
-    if (!name || !created || !category || !content) {
+    if (!name || !category || !content) {
       throw new Error('All fields are required.');
     }
 
@@ -50,9 +50,9 @@ function handleFormEditTask(e, refForm, taskId) {
 
   try {
     const formValues = getFormValues(refForm);
-    const { name, created, category, content } = formValues;
+    const { name, category, content } = formValues;
 
-    if (!name || !created || !category || !content) {
+    if (!name || !category || !content) {
       throw new Error('All fields are required.');
     }
 
