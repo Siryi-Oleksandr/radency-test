@@ -1,0 +1,42 @@
+/* Hide the default checkbox */
+.slider-checkbox {
+  display: none;
+}
+
+.slider-track {
+  width: 60px;
+  height: 30px;
+  background-color: #ccc;
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.slider-thumb {
+  width: 24px;
+  height: 24px;
+  background-color: $border-active-color;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: 0.3s;
+}
+
+/* Move the slider thumb to the right when checked */
+.slider-checkbox:checked + .slider-thumb {
+  transform: translateX(30px);
+  background-color: $bg-table-row-color;
+}
+
+.toggler-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.manager-wrapper {
+  display: flex;
+  justify-content: space-between;
+}

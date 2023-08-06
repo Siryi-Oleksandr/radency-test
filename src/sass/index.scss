@@ -1,3 +1,11 @@
-body {
-  background-color: aqua;
-}
+@import './base/common';
+@import './base/reset';
+@import './utils/variables';
+@import './base/body';
+@import './components/table';
+
+@import './components/buttons';
+@import './components/icons';
+@import './components/modal';
+@import './components/form';
+@import './components/tableManager';

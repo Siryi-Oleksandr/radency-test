@@ -1,0 +1,59 @@
+table {
+  width: 100%;
+  border-collapse: separate; /* Встановлюємо separate, щоб розділити колонки за допомогою бордерів */
+  border-spacing: 0 6px; /* Встановлюємо відступи між рядками на 3 пікселі */
+}
+
+th,
+td {
+  border: none;
+  padding: 8px;
+}
+
+th {
+  background-color: $bg-color;
+  color: $txt-white-color;
+  font-weight: bold;
+  text-align: left;
+}
+
+tr {
+  background-color: $bg-table-row-color;
+}
+
+tr:hover {
+  background-color: $bg-hover-color;
+}
+
+.options {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+}
+
+.options-wrapper {
+  display: flex;
+  gap: 6px;
+  justify-content: end;
+  align-items: center;
+}
+
+.icon-wrapper {
+  padding: 8px;
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+
+  background-color: $bg-color;
+  fill: $txt-white-color;
+}
+
+// .table--summary {
+//   margin-top: 50px;
+// }

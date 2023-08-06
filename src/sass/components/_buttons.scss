@@ -1,0 +1,60 @@
+.btn {
+  padding: 4px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  outline: none;
+
+  color: $txt-white-color;
+  background-color: transparent;
+
+  transition: color $animation, background-color $animation,
+    box-shadow $animation;
+
+  & svg {
+    fill: $bg-color;
+    transition: fill $animation, transform $animation;
+  }
+
+  &:hover svg,
+  &:focus svg {
+    fill: $bg-btn-active-color;
+    transform: scale(1.1);
+  }
+}
+
+.btn--head svg {
+  fill: $bg-white-color;
+}
+
+.btn--head:hover svg,
+.btn--head:focus svg {
+  fill: $bg-table-row-color;
+  transform: scale(1.1);
+}
+
+.btn-create {
+  display: block;
+  margin-left: auto;
+  padding: 4px;
+
+  width: fit-content;
+
+  border: 1px solid $bg-btn-active-color;
+  border-radius: 4px;
+  cursor: pointer;
+
+  color: $txt-black-color;
+  background-color: bg-table-row-color;
+
+  transition: transform $animation, background-color $animation;
+
+  &:hover,
+  &:focus {
+    background-color: $bg-hover-color;
+    transform: scale(1.05);
+  }
+}
